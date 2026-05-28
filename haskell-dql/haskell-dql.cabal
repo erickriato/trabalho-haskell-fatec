@@ -45,6 +45,7 @@ library
       base >=4.7 && <5
     , containers
     , hmatrix
+    , mtl
     , random
   default-language: Haskell2010
 
@@ -62,6 +63,7 @@ executable haskell-dql-exe
     , containers
     , haskell-dql
     , hmatrix
+    , mtl
     , random
   default-language: Haskell2010
 
@@ -80,5 +82,6 @@ test-suite haskell-dql-test
     , containers
     , haskell-dql
     , hmatrix
+    , mtl
     , random
   default-language: Haskell2010

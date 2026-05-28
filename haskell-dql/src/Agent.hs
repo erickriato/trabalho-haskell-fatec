@@ -34,13 +34,13 @@ decayEpsilon currentEpsilon =
   max Config.epsilonMin (currentEpsilon * Config.epsilonDecay)
 
 -- | Loop de treinamento do Mini-Batch extraído do Replay Buffer.
--- Realiza um 'foldl' sobre a lista de experiências. Para cada transição, 
--- calcula o alvo da Equação de Bellman e ajusta os pesos da Rede Neural via gradiente descendente.
-trainOnBatch :: Network -> [Experience] -> Network
-trainOnBatch initialNet batch =
-  foldl trainStep initialNet batch
+-- Realiza um 'foldl' sobre a lista de experiências, computando os alvos de Bellman
+-- com a 'targetNet' e atualizando os pesos da 'mainNet' via gradiente descendente.
+trainOnBatch :: Network -> Network -> [Experience] -> Network
+trainOnBatch mainNet targetNet batch =
+  foldl trainStep mainNet batch
   where
     trainStep :: Network -> Experience -> Network
     trainStep currentNet (s, a, r, nextS, isTerm) =
-      let target = computeTarget currentNet r nextS isTerm
+      let target = computeTarget targetNet r nextS isTerm
       in updateWeights currentNet s a target
