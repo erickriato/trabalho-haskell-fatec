@@ -28,6 +28,7 @@ library
       Config
       Env
       Lib
+      Network
       QTable
       Types
   other-modules:
