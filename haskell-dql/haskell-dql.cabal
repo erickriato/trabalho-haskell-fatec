@@ -28,6 +28,7 @@ library
       Config
       Env
       Lib
+      QTable
       Types
   other-modules:
       Paths_haskell_dql
